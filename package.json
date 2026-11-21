@@ -1,0 +1,28 @@
+{
+  "name": "abc-agent-budget-console",
+  "version": "1.0.0",
+  "description": "ABC - Agent Budget Console. A Windows-local AI subscription quota dashboard.",
+  "license": "MIT",
+  "author": "TLCFWorks",
+  "repository": { "type": "git", "url": "git+https://github.com/tlcfworks/abc.git" },
+  "homepage": "https://github.com/tlcfworks/abc#readme",
+  "bugs": { "url": "https://github.com/tlcfworks/abc/issues" },
+  "type": "module",
+  "bin": { "abc": "bin/abc.js" },
+  "files": ["bin/", "dist/", "public/", "README.md", "LICENSE", "docs/feasibility.md", "docs/distribution.md"],
+  "os": ["win32"],
+  "keywords": ["codex", "claude", "antigravity", "quota", "localhost", "windows"],
+  "engines": { "node": ">=24.0.0" },
+  "scripts": {
+    "start": "npm run build && node bin/abc.js",
+    "build": "tsc -p tsconfig.build.json",
+    "check": "tsc --noEmit",
+    "test": "node --test test/*.test.ts",
+    "verify:live": "node scripts/verify-live.ts",
+    "release:pack": "node scripts/package-release.mjs",
+    "release:windows": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/package-windows.ps1",
+    "release:verify": "node scripts/verify-package.mjs",
+    "prepack": "npm run check && npm run build"
+  },
+  "devDependencies": { "@types/node": "^24.0.0", "typescript": "^5.9.0" }
+}

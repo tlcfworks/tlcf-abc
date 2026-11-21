@@ -1,0 +1,81 @@
+Build a lightweight, Windows-local AI subscription quota monitoring dashboard.
+
+### Objective
+Monitor remaining subscription quotas for 6 accounts:
+- Codex × 2
+- Claude × 2
+- Google Antigravity × 2
+
+Keep the solution minimal. No Docker, database, cloud hosting, or unnecessary frameworks.
+
+### Account management
+- Automatically detect existing authenticated Codex, Claude Code, and Antigravity accounts on my Windows computer.
+- Allow me to attach detected accounts without disturbing their existing login sessions.
+- Provide an "Add Account" option with two methods:
+  1. Use an existing authenticated CLI profile/session.
+  2. Authenticate a new account through the provider's supported login flow, or supply supported credentials where permitted.
+- Support multiple independent accounts per provider, with isolated profiles.
+- Allow naming, removing, reconnecting, and manually refreshing accounts.
+- Never overwrite another account's authentication state.
+
+### Quota retrieval
+Investigate and implement provider-specific collectors:
+
+- **Codex:** Investigate `codex app-server` and `account/rateLimits/read`.
+- **Claude:** Investigate supported Claude Code usage interfaces, including `/usage` and locally available usage data.
+- **Antigravity:** Investigate CLI `/usage`, local quota interfaces, and supported programmatic retrieval methods.
+
+Read current official documentation and inspect installed CLI versions before choosing an approach.
+
+Retrieve, wherever exposed:
+- Remaining quota percentage
+- Hourly / 5-hour limits
+- Weekly limits
+- Monthly limits
+- Model-specific limits
+- Reset timestamps
+
+Do not assume every provider exposes every quota window. Never invent quota values or estimate them from token usage.
+
+### Dashboard
+Create a clean, responsive localhost page showing all six accounts.
+
+Each account should display:
+- Provider and account name
+- Remaining quotas as progress bars
+- Quota reset countdown
+- Last successful refresh
+- Authentication / connection status
+
+Add automatic refresh every 10 minutes and a manual refresh button.
+
+### Security
+- Everything runs locally, bound to `127.0.0.1`.
+- No telemetry, analytics, cloud backend, or third-party intermediary.
+- Network requests only to verified, necessary provider endpoints.
+- Never transmit credentials to any other destination.
+- Never expose tokens to frontend JavaScript, logs, or browser storage.
+- Prefer existing CLI authentication and provider-managed OAuth.
+- Do not collect account passwords, browser cookies, or unsupported session tokens.
+- Respect provider authentication terms. In particular, do not collect or intermediate Claude subscription credentials or use undocumented OAuth endpoints contrary to Anthropic's restrictions.
+- Store any independently managed permitted secrets securely using Windows credential protection.
+- Existing authentication files must remain untouched unless the user explicitly authorizes a supported login operation.
+
+### Implementation
+- Prefer a small Node.js/TypeScript local server and vanilla HTML/CSS/JavaScript frontend.
+- Keep dependencies minimal.
+- Separate provider-specific collectors from the dashboard.
+- Handle expired authentication, unsupported providers, missing quota windows, and failed requests gracefully.
+- Do not trigger AI inference or consume subscription quota merely to refresh the dashboard.
+- Include a simple Windows launcher and short README.
+
+### Execution
+1. First verify real quota retrieval feasibility for each provider against current implementations and documentation.
+2. Implement working collectors, not mocked integrations.
+3. Build the dashboard around the verified capabilities.
+4. Test each collector and multi-account isolation.
+5. Report unsupported capabilities explicitly rather than implementing unreliable workarounds.
+
+Do not overengineer. This is a personal utility, not an enterprise application.
+
+Proceed autonomously with implementation and testing. Ask only when actual credentials, interactive authentication, or essential user approval are required.

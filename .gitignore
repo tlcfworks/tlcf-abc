@@ -1,0 +1,10 @@
+node_modules/
+.research/
+.local/
+coverage/
+*.log
+dist/
+release/
+*.tgz
+.npmrc
+.env*

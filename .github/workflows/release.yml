@@ -1,0 +1,29 @@
+name: Build release artifacts
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - run: npm test
+      - run: npm run release:pack
+      - run: npm run release:verify
+      - run: npm run release:windows
+      - run: powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/verify-windows.ps1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: abc-windows-and-npm
+          path: |
+            release/*.tgz
+            release/*.zip
+            release/SHA256SUMS.txt

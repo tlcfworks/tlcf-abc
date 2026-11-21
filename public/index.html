@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC &mdash; Agent Budget Console</title><link rel="stylesheet" href="/style.css"><script type="module" src="/app.js"></script></head>
+<body>
+<div class="shell">
+  <header><a class="brand" href="/" aria-label="ABC - Agent Budget Console home"><span class="brand-mark" aria-hidden="true">A</span><span class="brand-copy"><strong>ABC</strong><small>Agent Budget Console</small></span></a><span class="local"><span aria-hidden="true">●</span> On this computer</span></header>
+  <main>
+    <section class="intro"><div><h1>Room for your next idea.</h1><p>Your AI subscriptions, with a little more perspective.<br>Real quota windows. Clear reset times. Everything local.</p></div><div class="intro-actions"><button id="refresh">Refresh all <span aria-hidden="true">↻</span></button><button id="add" class="primary">Add account <span aria-hidden="true">+</span></button></div></section>
+    <section class="overview" aria-label="Monitor status"><div><span class="signal" aria-hidden="true"></span><strong id="summary">Loading your accounts…</strong></div><span id="schedule">Checks every 10 minutes</span><span id="clock"></span></section>
+    <div id="notice" role="status" aria-live="polite"></div>
+    <div class="filters" aria-label="Filter providers"><button class="selected" data-filter="all" aria-pressed="true">All accounts</button><button data-filter="codex" aria-pressed="false">Codex</button><button data-filter="claude" aria-pressed="false">Claude</button><button data-filter="antigravity" aria-pressed="false">Antigravity</button></div>
+    <section id="accounts" class="accounts" aria-label="Subscription accounts"></section>
+    <aside class="note"><span aria-hidden="true">ⓘ</span><p>Only what the provider reports. Missing windows stay unavailable. Claude and Antigravity use observations published by their CLI status lines; a dashboard refresh never sends an AI prompt.</p></aside>
+  </main>
+  <footer><span>Local by design. No account secrets in your browser.</span><button id="about">Collector details</button></footer>
+</div>
+<dialog id="add-dialog"><form id="add-form"><div class="dialog-heading"><h2>Add an account</h2><button type="button" class="icon close" aria-label="Close">×</button></div><p class="muted">Attach a CLI profile or create an isolated Codex login.</p><label>Provider<select id="provider" name="provider"><option value="codex">Codex</option><option value="claude">Claude</option><option value="antigravity">Antigravity</option></select></label><label>Account name<input id="name" name="name" maxlength="80" required placeholder="e.g. Personal"></label><label>Connection method<select id="method"><option value="existing">Existing CLI profile</option><option value="new">New account</option></select></label><div id="existing-fields"><label>Detected profile<select id="profile"></select></label><label id="custom-path-label" hidden>Profile directory<input id="profile-path" placeholder="Absolute directory containing the CLI profile"></label><p id="profile-evidence" class="muted"></p></div><p id="new-explanation" class="muted" hidden></p><p id="form-error" role="alert"></p><div class="dialog-actions"><button type="button" class="close">Cancel</button><button type="submit" class="primary" id="attach">Attach account</button></div></form></dialog>
+<dialog id="details-dialog"><div class="dialog-heading"><h2 id="details-title">Collector details</h2><button class="icon close" aria-label="Close">×</button></div><div id="details-content"></div><div class="dialog-actions"><button class="close">Done</button></div></dialog>
+<dialog id="rename-dialog"><form id="rename-form"><div class="dialog-heading"><h2>Rename account</h2><button type="button" class="icon close" aria-label="Close">×</button></div><label>Account name<input id="rename-name" required maxlength="80"></label><p id="rename-error" role="alert"></p><div class="dialog-actions"><button type="button" class="close">Cancel</button><button class="primary">Save name</button></div></form></dialog>
+</body></html>
