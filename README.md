@@ -4,9 +4,9 @@ A Windows-local subscription quota dashboard for two Codex, two Claude, and two 
 
 Three distribution methods are supported: an npm package, a GitHub source checkout, and a Windows ZIP with Node.js bundled. All run locally at http://127.0.0.1:4317 by default. See `docs/distribution.md` for full instructions and release status.
 
-After npm publication: run `npm install -g abc-agent-budget-console`, then `abc`. Before publication, install the `.tgz` file from the GitHub release using `npm install -g .\abc-agent-budget-console-1.0.0.tgz`.
+After npm publication: run `npm install -g tlcf-abc`, then `tlcf-abc`. Before publication, install the `.tgz` file from the GitHub release using `npm install -g .\tlcf-abc-1.0.1.tgz`.
 
-From source: clone https://github.com/tlcfworks/abc.git , run `npm ci`, then `npm start`. From the Windows ZIP: extract everything and double-click `start.cmd`; no Node.js installation is needed. The browser opens automatically. Keep the terminal open; Ctrl+C stops ABC. Provider CLIs and sign-in are separate prerequisites.
+From source: clone https://github.com/tlcfworks/tlcf-abc.git , run `npm ci`, then `npm start`. From the Windows ZIP: extract everything and double-click `start.cmd`; no Node.js installation is needed. The browser opens automatically. Keep the terminal open; Ctrl+C stops ABC. Provider CLIs and sign-in are separate prerequisites.
 
 ## Connect accounts
 
@@ -40,7 +40,7 @@ The server binds only to `127.0.0.1`, validates the exact Host and Origin, requi
 
 The application has no direct external HTTP collector. Codex's official app-server manages its own necessary requests to OpenAI services; it starts in an isolated directory with custom provider configuration and proxy environment removed, analytics/feedback/OTel exporters disabled. Passive status-line collection makes no network requests. The supported Claude identity check runs with nonessential traffic disabled. Your ordinary native CLI sessions retain their own network settings.
 
-Use `abc --port 4320` or set `ABC_PORT` to change port 4317; the legacy `QUOTA_DESK_PORT` variable also works. Use `abc --no-open` to suppress automatic browser opening.
+Use `tlcf-abc --port 4320` or set `ABC_PORT` to change port 4317; the legacy `QUOTA_DESK_PORT` variable also works. Use `tlcf-abc --no-open` to suppress automatic browser opening.
 
 ## Verification
 

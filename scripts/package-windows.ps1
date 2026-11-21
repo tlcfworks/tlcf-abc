@@ -3,7 +3,7 @@ $ErrorActionPreference = 'Stop'
 $projectRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $package = Get-Content -LiteralPath (Join-Path $projectRoot 'package.json') -Raw | ConvertFrom-Json
 $releaseRoot = Join-Path $projectRoot 'release'
-$stage = Join-Path $releaseRoot "ABC-$($package.version)-windows-$Architecture"
+$stage = Join-Path $releaseRoot "tlcf-abc-$($package.version)-windows-$Architecture"
 $cache = Join-Path $projectRoot '.research/runtime-cache'
 New-Item -ItemType Directory -Path $releaseRoot,$cache -Force | Out-Null
 $archiveName = "node-v$NodeVersion-win-$Architecture.zip"

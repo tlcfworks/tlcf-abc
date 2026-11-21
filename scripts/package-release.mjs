@@ -21,7 +21,7 @@ for (const file of ['README.md', 'LICENSE']) await cp(join(root, file), join(git
 await mkdir(join(githubDir, 'docs'), { recursive: true });
 await cp(join(root, 'docs', 'feasibility.md'), join(githubDir, 'docs', 'feasibility.md'));
 await cp(join(root, 'docs', 'distribution.md'), join(githubDir, 'docs', 'distribution.md'));
-const scoped = { ...meta, name: '@tlcfworks/abc', publishConfig: { registry: 'https://npm.pkg.github.com' } };
+const scoped = { ...meta, name: '@tlcfworks/tlcf-abc', publishConfig: { registry: 'https://npm.pkg.github.com' } };
 delete scoped.scripts; delete scoped.devDependencies;
 await writeFile(join(githubDir, 'package.json'), JSON.stringify(scoped, null, 2) + '\n');
 const githubPack = JSON.parse(npm(['pack', '--json', '--pack-destination', release], githubDir));

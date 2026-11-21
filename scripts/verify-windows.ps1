@@ -1,7 +1,7 @@
 $ErrorActionPreference = 'Stop'
 $projectRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $package = Get-Content -LiteralPath (Join-Path $projectRoot 'package.json') -Raw | ConvertFrom-Json
-$archive = Join-Path $projectRoot "release/ABC-$($package.version)-windows-x64.zip"
+$archive = Join-Path $projectRoot "release/tlcf-abc-$($package.version)-windows-x64.zip"
 $destination = Join-Path $projectRoot ".research/zip verification $([guid]::NewGuid().ToString('N'))"
 Expand-Archive -LiteralPath $archive -DestinationPath $destination
 $runtime = Join-Path $destination 'runtime/node.exe'

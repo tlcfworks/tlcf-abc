@@ -18,7 +18,7 @@ try {
   assert.equal(result.status, 0, result.stderr);
   const installed = join(prefix, 'node_modules', pkg.name);
   assert.equal(spawnSync(process.execPath, [join(installed, 'bin/abc.js'), '--version'], { encoding: 'utf8' }).stdout.trim(), `ABC ${pkg.version}`);
-  assert.ok((await readFile(join(prefix, 'abc.cmd'), 'utf8')).replaceAll('\\', '/').includes('bin/abc.js'));
+  assert.ok((await readFile(join(prefix, 'tlcf-abc.cmd'), 'utf8')).replaceAll('\\', '/').includes('bin/abc.js'));
   // Start with no provider binaries on PATH: missing providers must not prevent use.
   const data = join(prefix, 'local-data'); await mkdir(data);
   const listener = createServer(); await new Promise(r => listener.listen(0, '127.0.0.1', r));
@@ -44,7 +44,7 @@ try {
   const updated = await (await fetch(origin + '/api/state')).json(); assert.equal(updated.accounts[0].snapshot.quotas[0].remainingPercent, 42);
   const disable = await fetch(`${origin}/api/accounts/${attached.id}/disable-collector`, { method: 'POST', headers, body: '{}' }); assert.equal(disable.status, 200);
   assert.deepEqual(JSON.parse(await readFile(join(profile, 'settings.json'), 'utf8')), { theme: 'original' });
-  console.log('Installed npm package verified: abc command, compiled assets, missing-provider handling, enable/collect/disable monitoring, settings restoration.');
+  console.log('Installed npm package verified: tlcf-abc command, compiled assets, missing-provider handling, enable/collect/disable monitoring, settings restoration.');
 } finally {
   if (child && child.exitCode === null) { child.kill(); await new Promise(r => child.once('exit', r)); }
   await rm(prefix, { recursive: true, force: true, maxRetries: 5, retryDelay: 200 });
